@@ -353,7 +353,7 @@ variable "clickhouse_backup_sa_key" {
 variable "github_endpoint" {
   type        = string
   default     = ""
-  description = "URL of Github enpoint to connect to. Useful for GH Enterprise."
+  description = "URL of Github endpoint to connect to. Useful for Github Enterprise."
 }
 
 # ┏━╸╻╺┳╸╻  ┏━┓┏┓
