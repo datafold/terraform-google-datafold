@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+## 1.0.0 (2024-03-12)
+
+
+### Features
+
+* First version of release ([db88274](https://github.com/datafold/terraform-google-datafold/commit/db8827435bcb43edf17746649b6ae560018fa0c6))
+
 ## 1.0.0 (2024-03-11)
 
 
