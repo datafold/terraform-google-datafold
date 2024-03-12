@@ -363,7 +363,7 @@ variable "github_endpoint" {
 variable "gitlab_endpoint" {
   type        = string
   default     = ""
-  description = "URL of Gitlab enpoint to connect to. Useful for GH Enterprise."
+  description = "URL of Gitlab endpoint to connect to. Useful for GItlab Enterprise."
 }
 
 # ╻┏┓╻╺┳╸┏━╸┏━┓┏━╸┏━┓┏┳┓
