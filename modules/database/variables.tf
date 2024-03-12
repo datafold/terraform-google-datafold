@@ -41,8 +41,8 @@ variable "postgres_username" {
 variable "postgres_instance" {
   type = string
   # https://cloud.google.com/sql/docs/mysql/instance-settings
-  #  Error 400: Invalid request: Only custom machine instance type and shared-core
-  # instance type allowed for PostgreSQL database., invalid
+  #  Error 400: Invalid request: Only _custom machine instance_ type and _shared-core_
+  # instance type allowed for PostgreSQL database.
   default     = "db-custom-2-7680"
   description = <<-EOT
     GCP instance type for PostgreSQL database.
