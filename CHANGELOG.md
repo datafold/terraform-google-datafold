@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.0.1](https://github.com/datafold/terraform-google-datafold/compare/v1.0.0...v1.0.1) (2024-03-13)
+
+
+### Bug Fixes
+
+* Deploy with shielded nodes policy ([4c75174](https://github.com/datafold/terraform-google-datafold/commit/4c75174e6d8c15f71da15832524fb71cdbc32d06))
+
 ## 1.0.0 (2024-03-12)
 
 
