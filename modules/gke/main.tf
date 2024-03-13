@@ -18,6 +18,7 @@ resource "google_container_cluster" "default" {
   networking_mode = "VPC_NATIVE"
 
   enable_intranode_visibility = true
+  enable_shielded_nodes       = true
 
   binary_authorization {
     evaluation_mode = "PROJECT_SINGLETON_POLICY_ENFORCE"
@@ -38,6 +39,13 @@ resource "google_container_cluster" "default" {
     channel = "STABLE"
   }
 
+  node_config {
+    shielded_instance_config {
+      enable_secure_boot          = true
+      enable_integrity_monitoring = true
+    }
+  }
+
   remove_default_node_pool = true
   initial_node_count       = 1
 
@@ -45,6 +53,12 @@ resource "google_container_cluster" "default" {
     client_certificate_config {
       issue_client_certificate = false
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      node_config,
+    ]
   }
 }
 
@@ -68,6 +82,7 @@ resource "google_container_node_pool" "default" {
     ]
     shielded_instance_config {
       enable_secure_boot = true
+      enable_integrity_monitoring = true
     }
     # Define the labels for the nodes
     labels = {
