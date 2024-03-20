@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.0.2](https://github.com/datafold/terraform-google-datafold/compare/v1.0.1...v1.0.2) (2024-03-20)
+
+
+### Bug Fixes
+
+* Allow support admin access to cluster ([253a962](https://github.com/datafold/terraform-google-datafold/commit/253a9628e1c67d5fb1feeb8b84817e85dd9fb86b))
+
 ### [1.0.1](https://github.com/datafold/terraform-google-datafold/compare/v1.0.0...v1.0.1) (2024-03-13)
 
 
