@@ -4,11 +4,8 @@
 
 locals {
   viewer_role = var.restricted_viewer_role ? "roles/viewer" : "roles/compute.viewer"
-  project_roles = var.restricted_roles ? [
-    "${var.project_id}=>roles/secretmanager.secretAccessor"
-    ] : [
+  project_roles = var.restricted_roles ? [] : [
     "${var.project_id}=>${local.viewer_role}",
-    "${var.project_id}=>roles/secretmanager.secretAccessor"
   ]
 }
 
@@ -32,10 +29,10 @@ module "project-iam-bindings" {
     "roles/iap.tunnelResourceAccessor" = [
       "group:datafold-onprem-support@datafold.com"
     ]
-    "roles/secretmanager.secretAccessor" = [
+    "roles/container.admin" = [
       "group:datafold-onprem-support@datafold.com"
     ]
-    "roles/iam.serviceAccountUser" = [
+    "roles/container.clusterAdmin" = [
       "group:datafold-onprem-support@datafold.com"
     ]
   }
