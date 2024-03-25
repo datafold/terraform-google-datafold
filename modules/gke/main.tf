@@ -60,6 +60,11 @@ resource "google_container_cluster" "default" {
       node_config,
     ]
   }
+
+  cluster_autoscaling {
+    enabled = false
+    autoscaling_profile = "OPTIMIZE_UTILIZATION"
+  }
 }
 
 resource "google_container_node_pool" "default" {
@@ -96,6 +101,7 @@ resource "google_container_node_pool" "default" {
   autoscaling {
     min_node_count = 1
     max_node_count = 2
+    location_policy = "ANY"
   }
 
   management {
