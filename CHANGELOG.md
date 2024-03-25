@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.0.3](https://github.com/datafold/terraform-google-datafold/compare/v1.0.2...v1.0.3) (2024-03-25)
+
+
+### Bug Fixes
+
+* Better downscaling ([57d83d9](https://github.com/datafold/terraform-google-datafold/commit/57d83d95536dfcee93804255db509f86ce7f8fc4))
+
 ### [1.0.2](https://github.com/datafold/terraform-google-datafold/compare/v1.0.1...v1.0.2) (2024-03-20)
 
 
