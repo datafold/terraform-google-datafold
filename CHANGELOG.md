@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+## [1.1.0](https://github.com/datafold/terraform-google-datafold/compare/v1.0.3...v1.1.0) (2024-05-02)
+
+
+### Features
+
+* Add BGP and NAT specific configurations ([27fe39c](https://github.com/datafold/terraform-google-datafold/commit/27fe39cede94dbb7d607418063a6be6baf129e99))
+
 ### [1.0.3](https://github.com/datafold/terraform-google-datafold/compare/v1.0.2...v1.0.3) (2024-03-25)
 
 
