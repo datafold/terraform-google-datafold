@@ -44,6 +44,8 @@ module "networking" {
   deploy_vpc_flow_logs           = var.deploy_vpc_flow_logs
   vpc_flow_logs_interval         = var.vpc_flow_logs_interval
   vpc_flow_logs_sampling         = var.vpc_flow_logs_sampling
+  cloud_router_bgp               = var.cloud_router_bgp
+  cloud_router_nats              = var.cloud_router_nats
 
   depends_on = [module.project_factory_project_services]
 }
