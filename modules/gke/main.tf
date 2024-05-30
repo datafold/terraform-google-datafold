@@ -122,62 +122,6 @@ resource "google_container_node_pool" "default" {
   }
 }
 
-resource "google_container_node_pool" "app_node_pool" {
-  count      = var.enable_app_node_pool ? 1 : 0
-  name       = "${var.deployment_name}app-node-pool"
-  cluster    = google_container_cluster.default.id
-  node_count = var.initial_node_count
-
-  node_config {
-    image_type      = "COS_CONTAINERD"
-    machine_type    = var.app_np_machine_type
-    disk_size_gb    = var.disk_size_gb
-    disk_type       = var.disk_type
-    service_account = resource.google_service_account.gke_service_account.email
-
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform",
-      "https://www.googleapis.com/auth/devstorage.read_only",
-      "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring",
-    ]
-    shielded_instance_config {
-      enable_secure_boot = true
-      enable_integrity_monitoring = true
-    }
-    # Define the labels for the nodes
-    labels = {
-      default-node-pool = true
-    }
-    metadata = {
-      disable-legacy-endpoints = "true"
-    }
-  }
-
-  autoscaling {
-    min_node_count = 1
-    max_node_count = 2
-    location_policy = "ANY"
-  }
-
-  management {
-    auto_upgrade = true
-    auto_repair  = true
-  }
-
-  upgrade_settings {
-    max_surge       = 1
-    max_unavailable = 1
-  }
-
-  lifecycle {
-    ignore_changes = [
-      location,
-    ]
-    create_before_destroy = true
-  }
-}
-
 resource "google_container_node_pool" "ch_node_pool" {
   count      = var.enable_ch_node_pool ? 1 : 0
   name       = "${var.deployment_name}ch-node-pool"

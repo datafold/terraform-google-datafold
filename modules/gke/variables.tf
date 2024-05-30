@@ -59,7 +59,7 @@ variable "initial_node_count" {
 
 variable "machine_type" {
   type        = string
-  default     = "e2-highmem-8"
+  default     = "e2-highmem-16"
   description = "The machine type for the GKE cluster nodes"
 }
 
@@ -75,22 +75,10 @@ variable "disk_type" {
   description = "The disk type for the GKE cluster nodes"
 }
 
-variable "enable_app_node_pool" {
-  description = "Whether to enable the app node pool"
-  type        = bool
-  default     = false
-}
-
 variable "enable_ch_node_pool" {
   description = "Whether to enable the ch node pool"
   type        = bool
   default     = false
-}
-
-variable "app_np_machine_type" {
-  type        = string
-  default     = "e2-highmem-16"
-  description = "The machine type for the app GKE cluster nodes"
 }
 
 variable "ch_machine_type" {
