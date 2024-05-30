@@ -59,7 +59,7 @@ variable "initial_node_count" {
 
 variable "machine_type" {
   type        = string
-  default     = "e2-highmem-16"
+  default     = "e2-highmem-8"
   description = "The machine type for the GKE cluster nodes"
 }
 
