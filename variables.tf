@@ -445,3 +445,21 @@ variable "vpc_master_cidr_block" {
   default     = "192.168.0.0/28"
   description = "cidr block for k8s master, must be a /28 block."
 }
+
+variable "machine_type" {
+  type        = string
+  default     = "e2-highmem-8"
+  description = "The machine type for the GKE cluster nodes"
+}
+
+variable "enable_ch_node_pool" {
+  description = "Whether to enable the ch node pool"
+  type        = bool
+  default     = false
+}
+
+variable "ch_machine_type" {
+  type        = string
+  default     = "n2-standard-8"
+  description = "The machine type for the ch GKE cluster nodes"
+}
