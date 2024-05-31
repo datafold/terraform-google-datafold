@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.2.1](https://github.com/datafold/terraform-google-datafold/compare/v1.2.0...v1.2.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* Variable fixes added ([35593c0](https://github.com/datafold/terraform-google-datafold/commit/35593c017e8a6f8d84d32ce536f35573b6018bba))
+
 ## [1.2.0](https://github.com/datafold/terraform-google-datafold/compare/v1.1.0...v1.2.0) (2024-05-31)
 
 
