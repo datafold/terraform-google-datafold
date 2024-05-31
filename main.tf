@@ -88,6 +88,9 @@ module "gke" {
   azs                   = local.azs
   disk_size_gb          = var.default_node_disk_size
   vpc_master_cidr_block = var.vpc_master_cidr_block
+  machine_type          = var.machine_type
+  enable_ch_node_pool   = var.enable_ch_node_pool
+  ch_machine_type       = var.ch_machine_type
 }
 
 module "load_balancer" {
