@@ -74,3 +74,15 @@ variable "disk_type" {
   default     = "pd-standard"
   description = "The disk type for the GKE cluster nodes"
 }
+
+variable "enable_ch_node_pool" {
+  description = "Whether to enable the ch node pool"
+  type        = bool
+  default     = false
+}
+
+variable "ch_machine_type" {
+  type        = string
+  default     = "n2-standard-8"
+  description = "The machine type for the ch GKE cluster nodes"
+}
