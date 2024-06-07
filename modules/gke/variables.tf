@@ -86,3 +86,9 @@ variable "ch_machine_type" {
   default     = "n2-standard-8"
   description = "The machine type for the ch GKE cluster nodes"
 }
+
+variable "k8s_authorized_networks" {
+  type        = map(string)
+  default     = {"0.0.0.0/0": "public"}
+  description = "Map of CIDR blocks that are able to connect to the K8S control plane"
+}
