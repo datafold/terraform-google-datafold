@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.2.2](https://github.com/datafold/terraform-google-datafold/compare/v1.2.1...v1.2.2) (2024-06-07)
+
+
+### Bug Fixes
+
+* Set restricted CIDR blocks for k8s control plane ([1a1fa2d](https://github.com/datafold/terraform-google-datafold/commit/1a1fa2d6b11cbfea6c8a9a10cd60f0e16593dac2))
+
 ### [1.2.1](https://github.com/datafold/terraform-google-datafold/compare/v1.2.0...v1.2.1) (2024-05-31)
 
 
