@@ -30,6 +30,16 @@ resource "google_container_cluster" "default" {
     master_ipv4_cidr_block  = var.vpc_master_cidr_block
   }
 
+  master_authorized_networks_config {
+    dynamic "cidr_blocks" {
+      for_each = var.k8s_authorized_networks
+      content {
+        cidr_block = cidr_blocks.key
+        display_name = cidr_blocks.value
+      }
+    }
+  }
+
   ip_allocation_policy {
     cluster_ipv4_cidr_block  = var.vpc_secondary_ranges_name_pods
     services_ipv4_cidr_block = var.vpc_secondary_ranges_name_services

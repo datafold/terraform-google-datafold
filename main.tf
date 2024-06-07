@@ -81,16 +81,17 @@ module "database" {
 module "gke" {
   source = "./modules/gke"
 
-  project_id            = var.project_id
-  deployment_name       = var.deployment_name
-  vpc_id                = local.vpc_id
-  subnetwork            = local.vpc_subnetwork
-  azs                   = local.azs
-  disk_size_gb          = var.default_node_disk_size
-  vpc_master_cidr_block = var.vpc_master_cidr_block
-  machine_type          = var.machine_type
-  enable_ch_node_pool   = var.enable_ch_node_pool
-  ch_machine_type       = var.ch_machine_type
+  project_id              = var.project_id
+  deployment_name         = var.deployment_name
+  vpc_id                  = local.vpc_id
+  subnetwork              = local.vpc_subnetwork
+  azs                     = local.azs
+  disk_size_gb            = var.default_node_disk_size
+  vpc_master_cidr_block   = var.vpc_master_cidr_block
+  machine_type            = var.machine_type
+  enable_ch_node_pool     = var.enable_ch_node_pool
+  ch_machine_type         = var.ch_machine_type
+  k8s_authorized_networks = var.k8s_authorized_networks
 }
 
 module "load_balancer" {
