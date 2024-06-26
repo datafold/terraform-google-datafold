@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.2.3](https://github.com/datafold/terraform-google-datafold/compare/v1.2.2...v1.2.3) (2024-06-26)
+
+
+### Bug Fixes
+
+* Upgrade SSL policy to restricted ([3f377f9](https://github.com/datafold/terraform-google-datafold/commit/3f377f9b964fd973a3a6470fc4ddc45b05d05263))
+
 ### [1.2.2](https://github.com/datafold/terraform-google-datafold/compare/v1.2.1...v1.2.2) (2024-06-07)
 
 
