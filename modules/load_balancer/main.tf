@@ -7,7 +7,7 @@ locals {
 resource "google_compute_ssl_policy" "lb_app" {
   project         = var.project_id
   name            = "${var.deployment_name}-app"
-  profile         = "MODERN"
+  profile         = "RESTRICTED"
   min_tls_version = "TLS_1_2"
 }
 
