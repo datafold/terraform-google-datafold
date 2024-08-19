@@ -469,3 +469,21 @@ variable "k8s_authorized_networks" {
   default     = {"0.0.0.0/0": "public"}
   description = "Map of CIDR blocks that are able to connect to the K8S control plane"
 }
+
+variable "k8s_cluster_version" {
+  type        = string
+  default     = "1.28.11"
+  description = "The version of Kubernetes to use for the GKE cluster. The patch/GKE specific version will be found automatically."
+}
+
+variable "k8s_node_auto_upgrade" {
+  type        = bool
+  default     = false
+  description = "Whether to enable auto-upgrade for the GKE cluster nodes"
+}
+
+variable "k8s_node_version" {
+  type        = string
+  default     = "1.28.11"
+  description = "The version of the nodes"
+}
