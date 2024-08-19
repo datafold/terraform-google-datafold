@@ -1,8 +1,15 @@
-data "google_container_engine_versions" "default_az" {
+data "google_container_engine_versions" "cluster" {
   project        = var.project_id
   provider       = google-beta
   location       = var.azs[0]
-  version_prefix = "${var.k8s_cluster_version}."
+  version_prefix = "${var.k8s_cluster_version}-"
+}
+
+data "google_container_engine_versions" "nodes" {
+  project        = var.project_id
+  provider       = google-beta
+  location       = var.azs[0]
+  version_prefix = "${var.k8s_cluster_version}-"
 }
 
 resource "google_container_cluster" "default" {
@@ -13,7 +20,7 @@ resource "google_container_cluster" "default" {
   project            = var.project_id
   network            = var.vpc_id
   subnetwork         = var.subnetwork
-  min_master_version = data.google_container_engine_versions.default_az.latest_master_version
+  master_version = data.google_container_engine_versions.cluster.latest_master_version
 
   networking_mode = "VPC_NATIVE"
 
@@ -81,6 +88,7 @@ resource "google_container_node_pool" "default" {
   name       = "${var.deployment_name}default-pool"
   cluster    = google_container_cluster.default.id
   node_count = var.initial_node_count
+  version    = var.k8s_node_version == "" ? null : data.google_container_engine_versions.nodes.latest_master_version
 
   node_config {
     image_type      = "COS_CONTAINERD"
@@ -115,7 +123,7 @@ resource "google_container_node_pool" "default" {
   }
 
   management {
-    auto_upgrade = true
+    auto_upgrade = var.k8s_node_auto_upgrade
     auto_repair  = true
   }
 
@@ -137,6 +145,7 @@ resource "google_container_node_pool" "ch_node_pool" {
   name       = "${var.deployment_name}ch-node-pool"
   cluster    = google_container_cluster.default.id
   node_count = var.initial_node_count
+  version    = var.k8s_node_version == "" ? null : data.google_container_engine_versions.nodes.latest_master_version
 
   node_config {
     image_type      = "COS_CONTAINERD"
@@ -176,7 +185,7 @@ resource "google_container_node_pool" "ch_node_pool" {
   }
 
   management {
-    auto_upgrade = true
+    auto_upgrade = var.k8s_node_auto_upgrade
     auto_repair  = true
   }
 
@@ -192,4 +201,3 @@ resource "google_container_node_pool" "ch_node_pool" {
     create_before_destroy = true
   }
 }
-

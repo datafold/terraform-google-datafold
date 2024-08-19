@@ -92,6 +92,9 @@ module "gke" {
   enable_ch_node_pool     = var.enable_ch_node_pool
   ch_machine_type         = var.ch_machine_type
   k8s_authorized_networks = var.k8s_authorized_networks
+  k8s_cluster_version     = var.k8s_cluster_version
+  k8s_node_version        = var.k8s_node_version
+  k8s_node_auto_upgrade   = var.k8s_node_auto_upgrade
 }
 
 module "load_balancer" {
