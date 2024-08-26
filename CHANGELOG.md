@@ -9,10 +9,6 @@ See this file for notable changes between versions.
 
 * Disable auto-upgrade nodes by default ([bc087ae](https://github.com/datafold/terraform-google-datafold/commit/bc087ae5fbbe1b0471295fea462b11f6c1f6c58a))
 
-### [1.2.4](https://github.com/datafold/terraform-google-datafold/compare/v1.2.3...v1.2.4) (2024-08-19)
-
-* Disable auto-upgrade of nodes ([bc087ae](https://github.com/datafold/terraform-google-datafold/commit/bc087ae5fbbe1b0471295fea462b11f6c1f6c58a))
-
 ### [1.2.3](https://github.com/datafold/terraform-google-datafold/compare/v1.2.2...v1.2.3) (2024-06-26)
 
 
