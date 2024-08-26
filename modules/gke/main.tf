@@ -20,7 +20,7 @@ resource "google_container_cluster" "default" {
   project            = var.project_id
   network            = var.vpc_id
   subnetwork         = var.subnetwork
-  master_version = data.google_container_engine_versions.cluster.latest_master_version
+  min_master_version = data.google_container_engine_versions.cluster.latest_master_version
 
   networking_mode = "VPC_NATIVE"
 
@@ -53,7 +53,7 @@ resource "google_container_cluster" "default" {
   }
 
   release_channel {
-    channel = "STABLE"
+    channel = var.k8s_node_auto_upgrade ? "STABLE" : "UNSPECIFIED"
   }
 
   node_config {
