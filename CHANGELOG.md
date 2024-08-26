@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.2.5](https://github.com/datafold/terraform-google-datafold/compare/v1.2.4...v1.2.5) (2024-08-26)
+
+
+### Bug Fixes
+
+* Add ability to set release channel to None for cluster ([9fa4eb6](https://github.com/datafold/terraform-google-datafold/commit/9fa4eb6a163935db4aabff3d053c4ab5680917e3))
+
 ### [1.2.4](https://github.com/datafold/terraform-google-datafold/compare/v1.2.3...v1.2.4) (2024-08-19)
 
 
