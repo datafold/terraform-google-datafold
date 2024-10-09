@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.2.6](https://github.com/datafold/terraform-google-datafold/compare/v1.2.5...v1.2.6) (2024-10-09)
+
+
+### Bug Fixes
+
+* Enable network policies ([bc6b188](https://github.com/datafold/terraform-google-datafold/commit/bc6b188a3e1cc00882a08dfe2db4aa2d4942b098))
+
 ### [1.2.5](https://github.com/datafold/terraform-google-datafold/compare/v1.2.4...v1.2.5) (2024-08-26)
 
 
