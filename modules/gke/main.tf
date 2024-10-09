@@ -72,6 +72,17 @@ resource "google_container_cluster" "default" {
     }
   }
 
+  network_policy {
+    enabled  = true
+    provider = "CALICO"
+  }
+
+  addons_config {
+    network_policy_config {
+      disabled = false
+    }
+  }
+
   lifecycle {
     ignore_changes = [
       node_config,
