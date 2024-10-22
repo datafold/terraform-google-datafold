@@ -212,3 +212,69 @@ resource "google_container_node_pool" "ch_node_pool" {
     create_before_destroy = true
   }
 }
+
+resource "google_container_node_pool" "custom_node_pools" {
+  for_each   = { for pool in var.custom_node_pools : pool.name => pool if pool.enabled }
+
+  name       = "${var.deployment_name}-${each.value.name}"
+  cluster    = google_container_cluster.default.id
+  node_count = each.value.initial_node_count
+  version    = var.k8s_node_version == "" ? null : data.google_container_engine_versions.nodes.latest_master_version
+
+  node_config {
+    image_type      = "COS_CONTAINERD"
+    machine_type    = each.value.machine_type
+    disk_size_gb    = each.value.disk_size_gb
+    disk_type       = each.value.disk_type
+    service_account = resource.google_service_account.gke_service_account.email
+
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform",
+      "https://www.googleapis.com/auth/devstorage.read_only",
+      "https://www.googleapis.com/auth/logging.write",
+      "https://www.googleapis.com/auth/monitoring",
+    ]
+    shielded_instance_config {
+      enable_secure_boot = true
+      enable_integrity_monitoring = true
+    }
+    # Define the labels for the nodes
+    labels = {
+      default-node-pool = false
+    }
+    metadata = {
+      disable-legacy-endpoints = "true"
+    }
+    dynamic "taint" {
+      for_each = each.value.taints
+      content {
+        key = taint.value["key"]
+        value = taint.value["value"]
+        effect = taint.value["effect"]
+      }
+    }
+  }
+
+  autoscaling {
+    min_node_count = each.value.min_node_count
+    max_node_count = each.value.max_node_count
+    location_policy = "ANY"
+  }
+
+  management {
+    auto_upgrade = var.k8s_node_auto_upgrade
+    auto_repair  = true
+  }
+
+  upgrade_settings {
+    max_surge       = 1
+    max_unavailable = 1
+  }
+
+  lifecycle {
+    ignore_changes = [
+      location,
+    ]
+    create_before_destroy = true
+  }
+}

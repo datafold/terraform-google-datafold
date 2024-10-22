@@ -95,6 +95,7 @@ module "gke" {
   k8s_cluster_version     = var.k8s_cluster_version
   k8s_node_version        = var.k8s_node_version
   k8s_node_auto_upgrade   = var.k8s_node_auto_upgrade
+  custom_node_pools       = var.custom_node_pools
 }
 
 module "load_balancer" {

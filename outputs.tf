@@ -98,6 +98,11 @@ output "vpc_id" {
   description = "The ID of the Google VPC the cluster runs in."
 }
 
+output "vpc_selflink" {
+  value       = local.vpc_selflink
+  description = "The ID of the Google VPC the cluster runs in."
+}
+
 output "vpc_cidr" {
   value       = var.vpc_cidr
   description = "The VPC CIDR range"

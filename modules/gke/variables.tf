@@ -104,3 +104,25 @@ variable "k8s_authorized_networks" {
   default     = {"0.0.0.0/0": "public"}
   description = "Map of CIDR blocks that are able to connect to the K8S control plane"
 }
+
+variable "custom_node_pools" {
+  type = list(object({
+    name = string
+    enabled = bool
+    initial_node_count = number
+    machine_type = string
+    disk_size_gb = number
+    disk_type = string
+    taints = list(object({
+      key    = string
+      value  = string
+      effect = string
+    }))
+    min_node_count  = number
+    max_node_count  = number
+    max_surge       = number
+    max_unavailable = number
+  }))
+  description = "Dynamic extra node pools"
+  default     = []
+}
