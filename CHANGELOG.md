@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+## [1.3.0](https://github.com/datafold/terraform-google-datafold/compare/v1.2.6...v1.3.0) (2024-10-22)
+
+
+### Features
+
+* Custom nodepools ([8338cfd](https://github.com/datafold/terraform-google-datafold/commit/8338cfdb09c4f9899310bf7ee2be89afd5c070a0))
+
 ### [1.2.6](https://github.com/datafold/terraform-google-datafold/compare/v1.2.5...v1.2.6) (2024-10-09)
 
 
