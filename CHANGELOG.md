@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.3.1](https://github.com/datafold/terraform-google-datafold/compare/v1.3.0...v1.3.1) (2024-10-23)
+
+
+### Bug Fixes
+
+* Add capability to specify spot ([c53f6fc](https://github.com/datafold/terraform-google-datafold/commit/c53f6fc83df998be5cc9b9aab6ec8cfea5699226))
+
 ## [1.3.0](https://github.com/datafold/terraform-google-datafold/compare/v1.2.6...v1.3.0) (2024-10-22)
 
 
