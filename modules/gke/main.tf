@@ -227,6 +227,7 @@ resource "google_container_node_pool" "custom_node_pools" {
     disk_size_gb    = each.value.disk_size_gb
     disk_type       = each.value.disk_type
     service_account = resource.google_service_account.gke_service_account.email
+    spot            = each.value.spot
 
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
@@ -237,6 +238,9 @@ resource "google_container_node_pool" "custom_node_pools" {
     shielded_instance_config {
       enable_secure_boot = true
       enable_integrity_monitoring = true
+    }
+    gvnic {
+      enabled = true
     }
     # Define the labels for the nodes
     labels = {

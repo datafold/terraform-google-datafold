@@ -113,6 +113,7 @@ variable "custom_node_pools" {
     machine_type = string
     disk_size_gb = number
     disk_type = string
+    spot = bool
     taints = list(object({
       key    = string
       value  = string
