@@ -476,6 +476,7 @@ variable "custom_node_pools" {
     max_node_count  = number
     max_surge       = number
     max_unavailable = number
+    labels          = map(string)
   }))
   description = "Dynamic extra node pools"
   default = []
