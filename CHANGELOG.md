@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.3.2](https://github.com/datafold/terraform-google-datafold/compare/v1.3.1...v1.3.2) (2024-10-28)
+
+
+### Bug Fixes
+
+* Add capability to customize labels for a nodepool ([88b2c6f](https://github.com/datafold/terraform-google-datafold/commit/88b2c6feca04206640936727ddec053abf2fa88c))
+
 ### [1.3.1](https://github.com/datafold/terraform-google-datafold/compare/v1.3.0...v1.3.1) (2024-10-23)
 
 
