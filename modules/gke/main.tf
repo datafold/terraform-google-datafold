@@ -243,9 +243,7 @@ resource "google_container_node_pool" "custom_node_pools" {
       enabled = true
     }
     # Define the labels for the nodes
-    labels = {
-      default-node-pool = false
-    }
+    labels = each.value.labels
     metadata = {
       disable-legacy-endpoints = "true"
     }
