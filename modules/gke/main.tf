@@ -146,6 +146,7 @@ resource "google_container_node_pool" "default" {
   lifecycle {
     ignore_changes = [
       location,
+      node_count,
     ]
     create_before_destroy = true
   }
@@ -208,6 +209,7 @@ resource "google_container_node_pool" "ch_node_pool" {
   lifecycle {
     ignore_changes = [
       location,
+      node_count,
     ]
     create_before_destroy = true
   }
@@ -276,6 +278,7 @@ resource "google_container_node_pool" "custom_node_pools" {
   lifecycle {
     ignore_changes = [
       location,
+      node_count,
     ]
     create_before_destroy = true
   }
