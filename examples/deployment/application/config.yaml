@@ -9,3 +9,5 @@ global:
     maintenanceWindow: ""
 postgres:
   install: false
+initjob:
+  install: true
