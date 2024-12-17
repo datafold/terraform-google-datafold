@@ -95,6 +95,9 @@ module "gke" {
   k8s_cluster_version     = var.k8s_cluster_version
   k8s_node_version        = var.k8s_node_version
   k8s_node_auto_upgrade   = var.k8s_node_auto_upgrade
+  k8s_maintenance_start   = var.k8s_maintenance_start
+  k8s_maintenance_end     = var.k8s_maintenance_end
+  k8s_maintenance_day     = var.k8s_maintenance_day
   custom_node_pools       = var.custom_node_pools
 }
 
