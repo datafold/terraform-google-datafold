@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.3.4](https://github.com/datafold/terraform-google-datafold/compare/v1.3.3...v1.3.4) (2024-12-17)
+
+
+### Bug Fixes
+
+* Set auto-upgrade back to true ([a0be0a5](https://github.com/datafold/terraform-google-datafold/commit/a0be0a51de56535f913e4770c7c9f3eb14ff11a3))
+
 ### [1.3.3](https://github.com/datafold/terraform-google-datafold/compare/v1.3.2...v1.3.3) (2024-10-30)
 
 
