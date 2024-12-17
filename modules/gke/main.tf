@@ -47,6 +47,32 @@ resource "google_container_cluster" "default" {
     }
   }
 
+  maintenance_policy {
+    recurring_window {
+      start_time = var.k8s_maintenance_start
+      end_time   = var.k8s_maintenance_end
+      recurrence = "FREQ=WEEKLY;BYDAY=${var.k8s_maintenance_day}"
+    }
+
+    maintenance_exclusion {
+      exclusion_name = "holiday-season2024"
+      start_time     = "2024-12-20T00:00:00Z"
+      end_time       = "2025-01-05T00:00:00Z"
+      exclusion_options {
+        scope = "NO_UPGRADES"
+      }
+    }
+
+    maintenance_exclusion {
+      exclusion_name = "holiday-season2025"
+      start_time     = "2025-12-20T00:00:00Z"
+      end_time       = "2026-01-05T00:00:00Z"
+      exclusion_options {
+        scope = "NO_UPGRADES"
+      }
+    }
+  }
+
   ip_allocation_policy {
     cluster_ipv4_cidr_block  = var.vpc_secondary_ranges_name_pods
     services_ipv4_cidr_block = var.vpc_secondary_ranges_name_services

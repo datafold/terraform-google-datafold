@@ -14,14 +14,37 @@ variable "azs" {
 
 variable "k8s_cluster_version" {
   type        = string
-  default     = "1.28.11"
+  default     = "1.30.5"
   description = "The version of Kubernetes to use for the GKE cluster. The patch/GKE specific version will be found automatically."
 }
 
 variable "k8s_node_auto_upgrade" {
   type        = bool
-  default     = false
+  default     = true
   description = "Whether to enable auto-upgrade for the GKE cluster nodes"
+}
+
+variable "k8s_maintenance_start" {
+  type        = string
+  default     = "2024-01-01T09:00:00Z"
+  description = "The start date and time for the maintenance window."
+}
+
+variable "k8s_maintenance_end" {
+  type        = string
+  default     = "2036-01-01T12:00:00Z"
+  description = "The end date and time for the maintenance window."
+}
+
+variable "k8s_maintenance_day" {
+  description = "Day for maintenance window. Valid values are MO,TU,WE,TH,FR,SA,SU"
+  type        = string
+  default     = "WE"
+
+  validation {
+    condition     = contains(["MO", "TU", "WE", "TH", "FR", "SA", "SU"], var.k8s_maintenance_day)
+    error_message = "Valid days are MO, TU, WE, TH, FR, SA, SU."
+  }
 }
 
 variable "k8s_node_version" {
