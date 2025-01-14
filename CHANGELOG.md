@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.3.6](https://github.com/datafold/terraform-google-datafold/compare/v1.3.5...v1.3.6) (2025-01-14)
+
+
+### Bug Fixes
+
+* propagate max node count ([3d48b6e](https://github.com/datafold/terraform-google-datafold/commit/3d48b6e3724ede811d2cc0fa2dcc4287bca31407))
+
 ### [1.3.5](https://github.com/datafold/terraform-google-datafold/compare/v1.3.4...v1.3.5) (2025-01-14)
 
 
