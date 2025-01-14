@@ -155,7 +155,7 @@ resource "google_container_node_pool" "default" {
 
   autoscaling {
     min_node_count = 1
-    max_node_count = 2
+    max_node_count = var.max_node_count
     location_policy = "ANY"
   }
 
