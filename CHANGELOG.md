@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.3.5](https://github.com/datafold/terraform-google-datafold/compare/v1.3.4...v1.3.5) (2025-01-14)
+
+
+### Bug Fixes
+
+* Make 4 default max size ([9bd71a9](https://github.com/datafold/terraform-google-datafold/commit/9bd71a9f21c4b0d1f14d2988fed4b0ed984292f1))
+
 ### [1.3.4](https://github.com/datafold/terraform-google-datafold/compare/v1.3.3...v1.3.4) (2024-12-17)
 
 
