@@ -99,6 +99,7 @@ module "gke" {
   k8s_maintenance_end     = var.k8s_maintenance_end
   k8s_maintenance_day     = var.k8s_maintenance_day
   custom_node_pools       = var.custom_node_pools
+  max_node_count          = var.max_node_count
 }
 
 module "load_balancer" {

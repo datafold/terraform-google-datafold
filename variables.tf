@@ -534,3 +534,9 @@ variable "k8s_node_version" {
   default     = "1.28.11"
   description = "The version of the nodes"
 }
+
+variable "max_node_count" {
+  type        = number
+  default     = 4
+  description = "The maximum number of nodes in the cluster"
+}
