@@ -92,6 +92,12 @@ variable "initial_node_count" {
   description = "The initial number of nodes for each node pool in the GKE cluster"
 }
 
+variable "max_node_count" {
+  type        = number
+  default     = 4
+  description = "The maximum number of nodes in the cluster"
+}
+
 variable "machine_type" {
   type        = string
   default     = "e2-highmem-8"
