@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.3.7](https://github.com/datafold/terraform-google-datafold/compare/v1.3.6...v1.3.7) (2025-02-28)
+
+
+### Bug Fixes
+
+* Optimize node count ([a8edf19](https://github.com/datafold/terraform-google-datafold/commit/a8edf191cf30773919713346dc7a89059da0eec3))
+
 ### [1.3.6](https://github.com/datafold/terraform-google-datafold/compare/v1.3.5...v1.3.6) (2025-01-14)
 
 
