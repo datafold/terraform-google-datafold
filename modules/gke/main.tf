@@ -205,6 +205,7 @@ resource "google_container_node_pool" "ch_node_pool" {
     # Define the labels for the nodes
     labels = {
       default-node-pool = false
+      clickhouse        = "reserved"
     }
     metadata = {
       disable-legacy-endpoints = "true"
