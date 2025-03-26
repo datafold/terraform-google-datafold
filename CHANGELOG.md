@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.3.8](https://github.com/datafold/terraform-google-datafold/compare/v1.3.7...v1.3.8) (2025-03-26)
+
+
+### Bug Fixes
+
+* Add label to ch node pool for node affinity ([456fe45](https://github.com/datafold/terraform-google-datafold/commit/456fe450ca8e688046c5ef7d899954f6d01535d5))
+
 ### [1.3.7](https://github.com/datafold/terraform-google-datafold/compare/v1.3.6...v1.3.7) (2025-02-28)
 
 
