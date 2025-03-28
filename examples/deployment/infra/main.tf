@@ -10,7 +10,7 @@
 
 module "gcp" {
   source  = "datafold/datafold/google"
-  version = "1.2.5"
+  version = "1.4.0"
 
   providers = {
     google = google

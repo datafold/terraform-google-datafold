@@ -1,7 +1,7 @@
 # https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/latest/submodules/private_service_access
 module "db_private_service_access" {
   source      = "GoogleCloudPlatform/sql-db/google//modules/private_service_access"
-  version     = "13.0.1"
+  version     = "25.2"
   project_id  = var.project_id
   vpc_network = var.vpc_id
 }
@@ -9,7 +9,7 @@ module "db_private_service_access" {
 # https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/latest/submodules/postgresql
 module "db" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
-  version = "~> 16.0"
+  version = "~> 25.2"
 
   project_id           = var.project_id
   name                 = var.deployment_name

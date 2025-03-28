@@ -103,7 +103,7 @@ resource "google_compute_router" "privaterouter" {
 module "cloud-nat" {
   count      = length(var.cloud_router_nats) > 0 ? 0 : 1
   source     = "terraform-google-modules/cloud-nat/google"
-  version    = "~> 1.2"
+  version    = "~> 5.3.0"
   project_id = var.project_id
   region     = var.provider_region
   router     = google_compute_router.privaterouter.name
