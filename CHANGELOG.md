@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+## [1.4.0](https://github.com/datafold/terraform-google-datafold/compare/v1.3.8...v1.4.0) (2025-03-28)
+
+
+### Features
+
+* Upgrading google providers ([6b0207a](https://github.com/datafold/terraform-google-datafold/commit/6b0207a69c5d0da7747073b9d196f082a2d3b53f))
+
 ### [1.3.8](https://github.com/datafold/terraform-google-datafold/compare/v1.3.7...v1.3.8) (2025-03-26)
 
 
