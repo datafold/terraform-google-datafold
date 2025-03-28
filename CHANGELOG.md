@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.4.1](https://github.com/datafold/terraform-google-datafold/compare/v1.4.0...v1.4.1) (2025-03-28)
+
+
+### Bug Fixes
+
+* Re-establish accidentally deleted role ([638bc8c](https://github.com/datafold/terraform-google-datafold/commit/638bc8c8cff8a415f686b4bf77ceab9a64ec2993))
+
 ## [1.4.0](https://github.com/datafold/terraform-google-datafold/compare/v1.3.8...v1.4.0) (2025-03-28)
 
 
