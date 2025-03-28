@@ -29,9 +29,9 @@ module "project-iam-bindings" {
     "roles/iap.tunnelResourceAccessor" = [
       "group:datafold-onprem-support@datafold.com"
     ]
-#    "roles/container.admin" = [
-#      "group:datafold-onprem-support@datafold.com"
-#    ]
+    "roles/container.admin" = [
+      "group:datafold-onprem-support@datafold.com"
+    ]
     "roles/container.clusterAdmin" = [
       "group:datafold-onprem-support@datafold.com"
     ]
