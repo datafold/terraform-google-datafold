@@ -207,6 +207,9 @@ resource "google_container_node_pool" "ch_node_pool" {
       default-node-pool = false
       clickhouse        = "reserved"
     }
+    resource_labels = {
+      "goog-gke-node-pool-provisioning-model" = "on-demand"
+    }
     metadata = {
       disable-legacy-endpoints = "true"
     }

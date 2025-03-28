@@ -4,6 +4,7 @@
 
 module "firewall_rules" {
   source       = "terraform-google-modules/network/google//modules/firewall-rules"
+  version      = "10.0.0"
   project_id   = var.project_id
   network_name = local.vpc_network
 

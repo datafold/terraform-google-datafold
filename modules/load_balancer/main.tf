@@ -79,7 +79,7 @@ data "google_compute_ssl_certificate" "lb_app" {
 # https://registry.terraform.io/modules/GoogleCloudPlatform/lb-http/google/latest
 module "lb_app" {
   source  = "GoogleCloudPlatform/lb-http/google"
-  version = "9.3.0"
+  version = "12.1.4"
 
   project           = var.project_id
   name              = "${var.deployment_name}-app"
@@ -87,11 +87,12 @@ module "lb_app" {
   firewall_networks = []
 
   # We enable SSL only if provided ssl_certificates or (certificate and private_key)
-  ssl                  = var.ssl_cert_name != "" || (var.ssl_cert_path != "" && var.ssl_private_key_path != "")
-  https_redirect       = var.ssl_cert_name != "" || (var.ssl_cert_path != "" && var.ssl_private_key_path != "")
-  use_ssl_certificates = var.ssl_cert_name != ""
+  ssl                    = var.ssl_cert_name != "" || (var.ssl_cert_path != "" && var.ssl_private_key_path != "")
+  https_redirect         = var.ssl_cert_name != "" || (var.ssl_cert_path != "" && var.ssl_private_key_path != "")
+  create_ssl_certificate = var.ssl_cert_name == ""
   # Using already imported SSL cert
-  ssl_certificates = var.ssl_cert_name != "" ? [one(data.google_compute_ssl_certificate.lb_app[*].self_link)] : []
+  ssl_certificates       = var.ssl_cert_name != "" ? [one(data.google_compute_ssl_certificate.lb_app[*].self_link)] : []
+
   # OR Create new SSL cert
   certificate = var.ssl_cert_path != "" ? file(var.ssl_cert_path) : null
   private_key = var.ssl_private_key_path != "" ? file(var.ssl_private_key_path) : null
