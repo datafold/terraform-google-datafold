@@ -157,3 +157,13 @@ variable "custom_node_pools" {
   description = "Dynamic extra node pools"
   default     = []
 }
+
+
+
+# --- roles
+
+variable "dfshell_service_account_name" {
+  type        = string
+  default     = "datafold-dfshell"
+  description = "Name of the service account for dfshell"
+}

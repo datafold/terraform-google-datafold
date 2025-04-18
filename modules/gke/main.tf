@@ -15,6 +15,7 @@ data "google_container_engine_versions" "nodes" {
 resource "google_container_cluster" "default" {
   provider = google-beta
 
+  location = var.azs[0]
   name = "${var.deployment_name}-cluster"
 
   project            = var.project_id

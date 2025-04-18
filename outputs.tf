@@ -127,3 +127,11 @@ output "redis_data_volume_id" {
   value       = resource.google_compute_disk.redis_data.id
   description = "The volume ID of the Redis PD data volume"
 }
+
+output "dfshell_service_account_email" {
+  value = module.gke.dfshell_service_account_email
+}
+
+output "dfshell_service_account_unique_id" {
+  value = module.gke.dfshell_service_account_unique_id
+}
