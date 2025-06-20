@@ -1,13 +1,52 @@
 global:
+  cloudProvider: "gcp"
   datadog:
     env: prod
     install: true
   operator:
     allowRollback: false
-    releaseChannel: stable
     backupCronSchedule: 0 1 * * *
     maintenanceWindow: ""
 postgres:
   install: false
-initjob:
+datadog:
+  configuration:
+    monitorPostgres: true
+clickhouse:
+  config:
+    uncompressed_cache_size: "5368709120"
+  tolerations:
+  - key: clickhouse
+    operator: "Equal"
+    value: reserved
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: clickhouse
+            operator: In
+            values:
+            - reserved
+worker-monitor:
+  install: true
+  replicaCount: 1
+  worker:
+    queues: "alerts"
+    count: 4
+    memory: "2000000"
+  resources:
+    limits:
+      memory: 6Gi
+    requests:
+      memory: 6Gi
+storage-worker:
+  install: true
+  replicaCount: 1
+  resources:
+    limits:
+      memory: 3Gi
+    requests:
+      memory: 3Gi
+worker-portal:
   install: true
