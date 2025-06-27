@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.4.3](https://github.com/datafold/terraform-google-datafold/compare/v1.4.2...v1.4.3) (2025-06-27)
+
+
+### Bug Fixes
+
+* Add delete protection flag setting for GKE clusters ([47e20a6](https://github.com/datafold/terraform-google-datafold/commit/47e20a6f7b44c3b2ec352d7fec405f11ed5ee26e))
+
 ### [1.4.2](https://github.com/datafold/terraform-google-datafold/compare/v1.4.1...v1.4.2) (2025-06-20)
 
 
