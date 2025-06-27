@@ -24,6 +24,12 @@ variable "k8s_node_auto_upgrade" {
   description = "Whether to enable auto-upgrade for the GKE cluster nodes"
 }
 
+variable "k8s_deletion_protection" {
+  type        = bool
+  default     = true
+  description = "If deletion protection is enabled (terraform feature)"
+}
+
 variable "k8s_maintenance_start" {
   type        = string
   default     = "2024-01-01T09:00:00Z"

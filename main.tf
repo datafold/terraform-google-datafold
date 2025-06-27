@@ -100,6 +100,7 @@ module "gke" {
   k8s_maintenance_day     = var.k8s_maintenance_day
   custom_node_pools       = var.custom_node_pools
   max_node_count          = var.max_node_count
+  k8s_deletion_protection = var.k8s_deletion_protection
 }
 
 module "load_balancer" {
