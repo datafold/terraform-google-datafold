@@ -119,6 +119,8 @@ resource "google_container_cluster" "default" {
     enabled = false
     autoscaling_profile = "OPTIMIZE_UTILIZATION"
   }
+
+  deletion_protection = var.k8s_deletion_protection
 }
 
 resource "google_container_node_pool" "default" {
