@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+## [1.5.0](https://github.com/datafold/terraform-google-datafold/compare/v1.4.3...v1.5.0) (2025-07-02)
+
+
+### Features
+
+* Workload identity for GKE ([81bc3ad](https://github.com/datafold/terraform-google-datafold/commit/81bc3ad2fa06c2c49ec04d1faf5a45ccd88577e4))
+
 ### [1.4.3](https://github.com/datafold/terraform-google-datafold/compare/v1.4.2...v1.4.3) (2025-06-27)
 
 
