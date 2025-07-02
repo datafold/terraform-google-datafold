@@ -52,7 +52,7 @@ variable "restricted_roles" {
 
 variable "redis_data_size" {
   type        = number
-  default     = 10
+  default     = 50
   description = "Redis volume size"
 }
 

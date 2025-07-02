@@ -36,14 +36,20 @@ module "gcp" {
   # Virtual Private Cloud
   whitelisted_ingress_cidrs = local.lb_whitelisted_ingress_cidrs
   whitelisted_egress_cidrs = concat(
-    local.github_cidrs
+    local.github_cidrs,
   )
-  deploy_vpc_flow_logs = true
+  vpc_cidr = "10.0.0.0/16"
+
+  # Clickhouse
+  clickhouse_data_disk_size = 200
+
+  # Database
+  database_version       = "POSTGRES_15"
+  deploy_vpc_flow_logs   = true
 
   # Clickhouse
   clickhouse_data_disk_size = 50
 
   # k8s
   k8s_authorized_networks = local.authorized_networks
-  k8s_cluster_version     = "1.28.11-gke.1260000"
 }

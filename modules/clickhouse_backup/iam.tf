@@ -20,7 +20,3 @@ resource "google_project_iam_member" "clickhouse" {
   member  = "serviceAccount:${google_service_account.clickhouse.email}"
 }
 
-resource "google_service_account_key" "clickhouse" {
-  count              = var.clickhouse_get_backup_sa_from_secrets_yaml ? 0 : 1
-  service_account_id = resource.google_service_account.clickhouse.id
-}

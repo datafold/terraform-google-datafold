@@ -20,6 +20,7 @@ resource "google_container_cluster" "default" {
   project            = var.project_id
   network            = var.vpc_id
   subnetwork         = var.subnetwork
+  location           = var.azs[0]
   min_master_version = data.google_container_engine_versions.cluster.latest_master_version
 
   networking_mode = "VPC_NATIVE"
@@ -118,6 +119,10 @@ resource "google_container_cluster" "default" {
   cluster_autoscaling {
     enabled = false
     autoscaling_profile = "OPTIMIZE_UTILIZATION"
+  }
+
+  workload_identity_config {
+    workload_pool = "${var.project_id}.svc.id.goog"
   }
 
   deletion_protection = var.k8s_deletion_protection
