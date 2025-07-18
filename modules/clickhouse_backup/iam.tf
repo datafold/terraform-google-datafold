@@ -20,3 +20,8 @@ resource "google_project_iam_member" "clickhouse" {
   member  = "serviceAccount:${google_service_account.clickhouse.email}"
 }
 
+resource "google_service_account_iam_member" "workload_identity_binding" {
+  service_account_id = google_service_account.clickhouse.name
+  role               = "roles/iam.workloadIdentityUser"
+  member             = "serviceAccount:${var.project_id}.svc.id.goog[${var.deployment_name}/datafold-clickhouse]"
+}

@@ -3,5 +3,5 @@ output "clickhouse_gcs_bucket" {
 }
 
 output "clickhouse_backup_sa" {
-  value = resource.google_service_account.clickhouse.account_id
+  value = resource.google_service_account.clickhouse.email
 }
