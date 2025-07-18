@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.5.2](https://github.com/datafold/terraform-google-datafold/compare/v1.5.1...v1.5.2) (2025-07-18)
+
+
+### Bug Fixes
+
+* Fix WI on nodepools ([d2dd0f4](https://github.com/datafold/terraform-google-datafold/commit/d2dd0f40a683d6bf69384fd7e70430ddbe9838fd))
+
 ### [1.5.1](https://github.com/datafold/terraform-google-datafold/compare/v1.5.0...v1.5.1) (2025-07-18)
 
 
