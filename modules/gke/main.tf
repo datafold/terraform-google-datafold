@@ -158,6 +158,9 @@ resource "google_container_node_pool" "default" {
     metadata = {
       disable-legacy-endpoints = "true"
     }
+    workload_metadata_config {
+      mode = "GKE_METADATA"
+    }
   }
 
   autoscaling {
@@ -225,6 +228,9 @@ resource "google_container_node_pool" "ch_node_pool" {
       value  = "reserved"
       effect = "NO_SCHEDULE"
     }
+    workload_metadata_config {
+      mode = "GKE_METADATA"
+    }
   }
 
   autoscaling {
@@ -277,6 +283,9 @@ resource "google_container_node_pool" "custom_node_pools" {
     shielded_instance_config {
       enable_secure_boot = true
       enable_integrity_monitoring = true
+    }
+    workload_metadata_config {
+      mode = "GKE_METADATA"
     }
     gvnic {
       enabled = true
