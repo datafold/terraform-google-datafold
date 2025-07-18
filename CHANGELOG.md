@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.5.1](https://github.com/datafold/terraform-google-datafold/compare/v1.5.0...v1.5.1) (2025-07-18)
+
+
+### Bug Fixes
+
+* Clickhouse backups failing ([ad0d8ad](https://github.com/datafold/terraform-google-datafold/commit/ad0d8ade33b0aadc0782c8ac7f47a4b92591a1a4))
+
 ## [1.5.0](https://github.com/datafold/terraform-google-datafold/compare/v1.4.3...v1.5.0) (2025-07-02)
 
 
