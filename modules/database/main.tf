@@ -27,7 +27,7 @@ module "db" {
   deletion_protection = var.db_deletion_protection
 
   ip_configuration = {
-    require_ssl = false
+    ssl_mode    = "ENCRYPTED_ONLY"
 
     // Private
     ipv4_enabled        = false
