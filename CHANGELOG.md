@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.5.3](https://github.com/datafold/terraform-google-datafold/compare/v1.5.2...v1.5.3) (2025-08-14)
+
+
+### Bug Fixes
+
+* Enforce SSL connections on sql database ([e8c0f3c](https://github.com/datafold/terraform-google-datafold/commit/e8c0f3ce2f07619a0ee4d40cd17a8105719c8472))
+
 ### [1.5.2](https://github.com/datafold/terraform-google-datafold/compare/v1.5.1...v1.5.2) (2025-07-18)
 
 
