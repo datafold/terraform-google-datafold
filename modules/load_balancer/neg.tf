@@ -8,7 +8,7 @@ resource "random_id" "neg_name" {
 }
 
 resource "google_compute_network_endpoint_group" "nginx" {
-  count = var.deploy_neg_backend ? 1 : 0
+  count = var.deploy_lb && var.deploy_neg_backend ? 1 : 0
 
   name         = local.neg_name
   network      = var.vpc_id

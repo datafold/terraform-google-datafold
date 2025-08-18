@@ -87,6 +87,12 @@ variable "deploy_neg_backend" {
   description = "Set this to true to connect the backend service to the NEG that the GKE cluster will create"
 }
 
+variable "deploy_lb" {
+  type        = bool
+  default     = true
+  description = "Allows a deploy with a not-yet-existing load balancer"
+}
+
 variable "vpc_id" {
   type        = string
   description = "The ID of the VPC network where the GKE cluster will be created"

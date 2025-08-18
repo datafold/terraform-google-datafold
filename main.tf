@@ -121,6 +121,7 @@ module "load_balancer" {
   vpc_id                         = local.vpc_id
   subnetwork                     = local.vpc_subnetwork
   deploy_neg_backend             = var.deploy_neg_backend
+  deploy_lb                      = var.deploy_lb
 
   depends_on = [
     module.project_factory_project_services,
