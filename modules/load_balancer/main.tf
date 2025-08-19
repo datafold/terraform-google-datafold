@@ -67,7 +67,7 @@ resource "google_compute_managed_ssl_certificate" "lb_app" {
 }
 
 data "google_compute_ssl_certificate" "lb_app" {
-  count   = var.ssl_cert_name != "" ? 1 : 0
+  count   = var.deploy_lb && var.ssl_cert_name != "" ? 1 : 0
   project = var.project_id
   name    = var.ssl_cert_name
 
@@ -80,6 +80,8 @@ data "google_compute_ssl_certificate" "lb_app" {
 module "lb_app" {
   source  = "GoogleCloudPlatform/lb-http/google"
   version = "12.1.4"
+
+  count             = var.deploy_lb ? 1 : 0
 
   project           = var.project_id
   name              = "${var.deployment_name}-app"
@@ -150,4 +152,8 @@ module "lb_app" {
   depends_on = [
     resource.google_compute_network_endpoint_group.nginx,
   ]
+}
+
+locals {
+  external_ip = var.deploy_lb ? module.lb_app[0].external_ip : "255.255.255.255"
 }

@@ -122,6 +122,7 @@ variable "lb_app_rules" {
     src_ip_ranges  = list(string) # optional, only used if match_type is "src_ip_ranges"
     expr           = string       # optional, only used if match_type is "expr"
   }))
+  default = []
   description = "Extra rules to apply to the application load balancer for additional filtering"
 }
 
@@ -135,6 +136,12 @@ variable "deploy_neg_backend" {
   type        = bool
   default     = true
   description = "Set this to true to connect the backend service to the NEG that the GKE cluster will create"
+}
+
+variable "deploy_lb" {
+  type        = bool
+  default     = true
+  description = "Allows a deploy with a not-yet-existing load balancer"
 }
 
 #  ╻ ╻┏━┓┏━╸
