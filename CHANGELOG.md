@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+## [1.6.0](https://github.com/datafold/terraform-google-datafold/compare/v1.5.3...v1.6.0) (2025-08-19)
+
+
+### Features
+
+* Deploy LB from kubernetes with Helm ([c692dd1](https://github.com/datafold/terraform-google-datafold/commit/c692dd16e808fe2c5782431eec515874757f7ec9))
+
 ### [1.5.3](https://github.com/datafold/terraform-google-datafold/compare/v1.5.2...v1.5.3) (2025-08-14)
 
 
