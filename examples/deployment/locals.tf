@@ -20,4 +20,14 @@ locals {
   authorized_networks = {
     "${local.proxy_ip}" : "k8s-proxy",
   }
+
+  # GitHub CIDRs for egress whitelist
+  github_cidrs = [
+    "140.82.112.0/20",
+    "185.199.108.0/22",
+    "192.30.252.0/22"
+  ]
+
+  # Kubernetes version
+  k8s_version = "1.32"
 }

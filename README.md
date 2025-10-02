@@ -1,31 +1,53 @@
 =======
 # Datafold Google module
 
-This repository provisions resources on Google, preparing them for a deployment of the
-application on a GKE cluster.
+This repository provisions infrastructure resources on Google Cloud for deploying Datafold using the datafold-operator.
 
 ## About this module
 
+**⚠️ Important**: This module is now **optional**. If you already have GKE infrastructure in place, you can configure the required resources independently. This module is primarily intended for customers who need to set up the complete infrastructure stack for GKE deployment.
+
+The module provisions Google Cloud infrastructure resources that are required for Datafold deployment. Application configuration is now managed through the `datafoldapplication` custom resource on the cluster using the datafold-operator, rather than through Terraform application directories.
+
+## Breaking Changes
+
+### Load Balancer Deployment (Default Changed)
+
+**Breaking Change**: The load balancer is **no longer deployed by default**. The default behavior has been toggled to `deploy_lb = false`.
+
+- **Previous behavior**: Load balancer was deployed by default
+- **New behavior**: Load balancer deployment is disabled by default
+- **Action required**: If you need a load balancer, you must explicitly set `deploy_lb = true` in your configuration, so that you don't lose it. (in the case it does happen, you need to redeploy it and then update your DNS to the new LB IP).
+
+### Application Directory Removal
+
+- The "application" directory is no longer part of this repository
+- Application configuration is now managed through the `datafoldapplication` custom resource on the cluster
+
 ## Prerequisites
 
-* A Google cloud account, preferably a new isolated one.
+* A Google Cloud account, preferably a new isolated one.
 * Terraform >= 1.4.6
 * A customer contract with Datafold
   * The application does not work without credentials supplied by sales
 * Access to our public helm-charts repository
 
-This deployment will create the following resources:
+The full deployment will create the following resources:
 
 * Google VPC
-* Google subnet
+* Google subnets
 * Google GCS bucket for clickhouse backups
-* Google external application load balancer
-* Google HTTPS certificate, unless preregistered and provided
+* Google Cloud Load Balancer (optional, disabled by default)
+* Google-managed SSL certificate (if load balancer is enabled)
 * Three persistent disk volumes for local data storage
+* Cloud SQL PostgreSQL database
 * A GKE cluster
 * Service accounts for the GKE cluster to perform actions outside of its cluster boundary:
   * Provisioning persistent disk volumes
   * Updating Network Endpoint Group to route traffic to pods directly
+  * Managing GCS bucket access for ClickHouse backups
+
+**Infrastructure Dependencies**: For a complete list of required infrastructure resources and detailed deployment guidance, see the [Datafold Dedicated Cloud GCP Deployment Documentation](https://docs.datafold.com/datafold-deployment/dedicated-cloud/gcp).
 
 ## Negative scope
 
@@ -34,41 +56,92 @@ This deployment will create the following resources:
 ## How to use this module
 
 * See the example for a potential setup, which has dependencies on our helm-charts
-* Create secret files with our variables
 
-## Examples
+The example directory contains a single deployment example for infrastructure setup.
 
-* Implement the example in this repository
-* Change the settings
-* Run `terraform init`
-* Run `terraform apply`
+Setting up the infrastructure:
 
-### Initializing the application
+* It is easiest if you have full admin access in the target project.
+* Pre-create a symmetric encryption key that is used to encrypt/decrypt secrets of this deployment.
+  * Use the alias instead of the `mrk` link. Put that into `locals.tf`
+* **Certificate Requirements** (depends on load balancer deployment method):
+  * **If deploying load balancer from this Terraform module** (`deploy_lb = true`): Pre-create and validate the SSL certificate in your DNS, then refer to that certificate in main.tf using its domain name (Replace "datafold.example.com")
+  * **If deploying load balancer from within Kubernetes**: The certificate will be created automatically, but you must wait for it to become available and then validate it in your DNS after the deployment is complete
+* Change the settings in locals.tf
+  * provider_region = which region you want to deploy in.
+  * project_id = The GCP project ID where you want to deploy.
+  * kms_profile = The profile you want to use to issue the deployments. Targets the deployment account.
+  * kms_key = A pre-created symmetric KMS key. It's only purpose is for encryption/decryption of deployment secrets.
+  * deployment_name = The name of the deployment, used in kubernetes namespace, container naming and datadog "deployment" Unified Tag)
+* Run `terraform init` in the infra directory.
+* Run `terraform apply` in `infra` directory. This should complete ok. 
+  * Check in the console if you see the GKE cluster, Cloud SQL database, etc.
+  * If you enabled load balancer deployment, check for the load balancer as well.
 
-The deployment is created and the initjob should have created the databases and done the 
-initialization of the site settings.
+**Application Deployment**: After infrastructure is ready, deploy the application using the datafold-operator. See the [Datafold Helm Charts repository](https://github.com/datafold/helm-charts) for detailed application deployment instructions.
 
-If that didn't complete successfully, try to restart the job. 
+## Infrastructure Dependencies
 
-Once the deployment is complete and the initjob succeeded, we can set the install to that for false in config.yaml:
+This module is designed to provide the complete infrastructure stack for Datafold deployment. However, if you already have GKE infrastructure in place, you can choose to configure the required resources independently.
 
-```
-initjob:
-  install: false
-```
+**Required Infrastructure Components**:
+- GKE cluster with appropriate node pools
+- Cloud SQL PostgreSQL database
+- GCS bucket for ClickHouse backups
+- Persistent disks for persistent storage (ClickHouse data, ClickHouse logs, Redis data)
+- IAM roles and service accounts for cluster operations
+- Load balancer (optional, can be managed by Google Cloud Load Balancer Controller)
+- VPC and networking components
+- SSL certificate (validation timing depends on deployment method):
+  - **Terraform-managed LB**: Certificate must be pre-created and validated
+  - **Kubernetes-managed LB**: Certificate created automatically, validated post-deployment
 
-Alternatively, here are the manual steps to achieve the same:
+**Alternative Approaches**:
+- **Use this module**: Provides complete infrastructure setup for new deployments
+- **Use existing infrastructure**: Configure required resources manually or through other means
+- **Hybrid approach**: Use this module for some components and existing infrastructure for others
 
-Establish a shell into the `<deployment>-dfshell` container. 
-It is likely that the scheduler and server containers are crashing in a loop.
+For detailed specifications of each required component, see the [Datafold Dedicated Cloud GCP Deployment Documentation](https://docs.datafold.com/datafold-deployment/dedicated-cloud/gcp). For application deployment instructions, see the [Datafold Helm Charts repository](https://github.com/datafold/helm-charts).
 
-All we need to is to run these commands:
+## Detailed Infrastructure Components
 
-1. `./manage.py clickhouse create-tables`
-2. `./manage.py database create-or-upgrade`
-3. `./manage.py installation set-new-deployment-params`
+Based on the [Datafold GCP Deployment Documentation](https://docs.datafold.com/datafold-deployment/dedicated-cloud/gcp), this module provisions the following detailed infrastructure components:
 
-Now all containers should be up and running.
+### Persistent Disks
+The Datafold application requires 3 persistent disks for storage, each deployed as encrypted Google Compute Engine persistent disks in the primary availability zone:
+
+- **ClickHouse data disk**: Serves as the analytical database storage for Datafold. ClickHouse is a columnar database that excels at analytical queries. The default 40GB allocation usually provides sufficient space for typical deployments, but it can be scaled up based on data volume requirements.
+- **ClickHouse logs disk**: Stores ClickHouse's internal logs and temporary data. The separate logs disk prevents log data from consuming IOPS and I/O performance from actual data storage.
+- **Redis data disk**: Provides persistent storage for Redis, which handles task distribution and distributed locks in the Datafold application. Redis is memory-first but benefits from persistence for data durability across restarts.
+
+All persistent disks are encrypted by default using Google-managed encryption keys, ensuring data security at rest.
+
+### Load Balancer
+The load balancer serves as the primary entry point for all external traffic to the Datafold application. The module offers 2 deployment strategies:
+
+- **External Load Balancer Deployment** (the default approach): Creates a Google Cloud Load Balancer through Terraform
+- **Kubernetes-Managed Load Balancer**: Relies on the Google Cloud Load Balancer Controller running within the GKE cluster, deployed by the datafold application resource. This means Kubernetes creates the load balancer for you.
+
+### GKE Cluster
+The Google Kubernetes Engine (GKE) cluster forms the compute foundation for the Datafold application:
+
+- **Network Architecture**: The entire cluster is deployed into private subnets with Cloud NAT for egress traffic
+- **Security Features**: Workload Identity, Shielded nodes, Binary authorization, Network policy, and Private nodes
+- **Node Management**: Supports up to three managed node pools with automatic scaling
+
+### IAM Roles and Permissions
+The IAM architecture follows the principle of least privilege:
+
+- **GKE service account**: Basic permissions for logging, monitoring, and storage access
+- **ClickHouse backup service account**: Custom role for ClickHouse to make backups and store them on Cloud Storage
+- **Datafold service accounts**: Pre-defined roles for different application components
+
+### Cloud SQL Database
+The PostgreSQL Cloud SQL instance serves as the primary relational database:
+
+- **Storage configuration**: Starts with a 20GB initial allocation that can automatically scale up to 100GB
+- **High availability**: Intentionally disabled by default to reduce costs and complexity
+- **Security and encryption**: Always encrypts data at rest using Google-managed encryption keys
 
 <!-- BEGIN_TF_DOCS -->
 
