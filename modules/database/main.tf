@@ -19,6 +19,7 @@ module "db" {
 
   database_version = var.database_version
   db_name          = var.database_name
+  edition          = var.database_edition
   tier             = var.postgres_instance
   disk_size        = var.postgres_allocated_storage
   user_name        = var.postgres_username
