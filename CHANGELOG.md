@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.6.1](https://github.com/datafold/terraform-google-datafold/compare/v1.6.0...v1.6.1) (2025-10-10)
+
+
+### Bug Fixes
+
+* Add database edition ([be2a6e4](https://github.com/datafold/terraform-google-datafold/commit/be2a6e441c640ce6994da14311bed4f1d9e16cf8))
+
 ## [1.6.0](https://github.com/datafold/terraform-google-datafold/compare/v1.5.3...v1.6.0) (2025-08-19)
 
 
