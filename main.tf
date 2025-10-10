@@ -73,6 +73,7 @@ module "database" {
   database_name              = var.database_name
   postgres_ro_username       = var.postgres_ro_username
   database_version           = var.database_version
+  database_edition           = var.database_edition
   common_tags                = var.common_tags
 
   depends_on = [module.project_factory_project_services]

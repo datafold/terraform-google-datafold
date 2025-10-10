@@ -361,6 +361,17 @@ variable "database_version" {
   description = "Version of the database"
 }
 
+variable "database_edition" {
+  type        = string
+  default     = null  # Auto determined by module or API
+  description = "The edition of the database (ENTERPRISE or ENTERPRISE_PLUS). If null, automatically determined based on version."
+
+  validation {
+    condition     = var.database_edition == null ? true : contains(["ENTERPRISE", "ENTERPRISE_PLUS"], var.database_edition)
+    error_message = "database_edition must be either ENTERPRISE or ENTERPRISE_PLUS."
+  }
+}
+
 #  ┏━╸╻  ╻┏━╸╻┏ ╻ ╻┏━┓╻ ╻┏━┓┏━╸
 #  ┃  ┃  ┃┃  ┣┻┓┣━┫┃ ┃┃ ┃┗━┓┣╸
 #  ┗━╸┗━╸╹┗━╸╹ ╹╹ ╹┗━┛┗━┛┗━┛┗━╸
