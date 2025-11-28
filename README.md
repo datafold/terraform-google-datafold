@@ -77,8 +77,9 @@ Setting up the infrastructure:
 * Run `terraform apply` in `infra` directory. This should complete ok. 
   * Check in the console if you see the GKE cluster, Cloud SQL database, etc.
   * If you enabled load balancer deployment, check for the load balancer as well.
+  * The configuration values needed for application deployment will be output to the console after the apply completes.
 
-**Application Deployment**: After infrastructure is ready, deploy the application using the datafold-operator. See the [Datafold Helm Charts repository](https://github.com/datafold/helm-charts) for detailed application deployment instructions.
+**Application Deployment**: After infrastructure is ready, deploy the application using the datafold-operator. Continue with the [Datafold Helm Charts repository](https://github.com/datafold/helm-charts) to deploy the operator manager and then the application through the operator. The operator is the default and recommended method for deploying Datafold.
 
 ## Infrastructure Dependencies
 
@@ -101,7 +102,7 @@ This module is designed to provide the complete infrastructure stack for Datafol
 - **Use existing infrastructure**: Configure required resources manually or through other means
 - **Hybrid approach**: Use this module for some components and existing infrastructure for others
 
-For detailed specifications of each required component, see the [Datafold Dedicated Cloud GCP Deployment Documentation](https://docs.datafold.com/datafold-deployment/dedicated-cloud/gcp). For application deployment instructions, see the [Datafold Helm Charts repository](https://github.com/datafold/helm-charts).
+For detailed specifications of each required component, see the [Datafold Dedicated Cloud GCP Deployment Documentation](https://docs.datafold.com/datafold-deployment/dedicated-cloud/gcp). For application deployment instructions, continue with the [Datafold Helm Charts repository](https://github.com/datafold/helm-charts) to deploy the operator manager and then the application through the operator.
 
 ## Detailed Infrastructure Components
 
@@ -142,6 +143,19 @@ The PostgreSQL Cloud SQL instance serves as the primary relational database:
 - **Storage configuration**: Starts with a 20GB initial allocation that can automatically scale up to 100GB
 - **High availability**: Intentionally disabled by default to reduce costs and complexity
 - **Security and encryption**: Always encrypts data at rest using Google-managed encryption keys
+
+### Initializing the application
+
+After deploying the application through the operator (see the [Datafold Helm Charts repository](https://github.com/datafold/helm-charts)), establish a shell into the `<deployment>-dfshell` container. 
+It is likely that the scheduler and server containers are crashing in a loop.
+
+All we need to do is to run these commands:
+
+1. `./manage.py clickhouse create-tables`
+2. `./manage.py database create-or-upgrade`
+3. `./manage.py installation set-new-deployment-params`
+
+Now all containers should be up and running.
 
 <!-- BEGIN_TF_DOCS -->
 
