@@ -164,13 +164,13 @@ Now all containers should be up and running.
 | Name | Version |
 |------|---------|
 | <a name="requirement_dns"></a> [dns](#requirement\_dns) | 3.2.1 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.80.0 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 6.27.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | >= 4.80.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | >= 6.27.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 
 ## Modules
@@ -183,7 +183,7 @@ Now all containers should be up and running.
 | <a name="module_load_balancer"></a> [load\_balancer](#module\_load\_balancer) | ./modules/load_balancer | n/a |
 | <a name="module_networking"></a> [networking](#module\_networking) | ./modules/networking | n/a |
 | <a name="module_project-iam-bindings"></a> [project-iam-bindings](#module\_project-iam-bindings) | terraform-google-modules/iam/google//modules/projects_iam | n/a |
-| <a name="module_project_factory_project_services"></a> [project\_factory\_project\_services](#module\_project\_factory\_project\_services) | terraform-google-modules/project-factory/google//modules/project_services | ~> 14.4.0 |
+| <a name="module_project_factory_project_services"></a> [project\_factory\_project\_services](#module\_project\_factory\_project\_services) | terraform-google-modules/project-factory/google//modules/project_services | ~> 18.0.0 |
 
 ## Resources
 
@@ -195,31 +195,48 @@ Now all containers should be up and running.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_add_onprem_support_group"></a> [add\_onprem\_support\_group](#input\_add\_onprem\_support\_group) | Flag to add onprem support group for datafold-onprem-support@datafold.com | `bool` | `true` | no |
+| <a name="input_ch_machine_type"></a> [ch\_machine\_type](#input\_ch\_machine\_type) | The machine type for the ch GKE cluster nodes | `string` | `"n2-standard-8"` | no |
 | <a name="input_clickhouse_backup_sa_key"></a> [clickhouse\_backup\_sa\_key](#input\_clickhouse\_backup\_sa\_key) | SA key from secrets | `string` | `""` | no |
 | <a name="input_clickhouse_data_disk_size"></a> [clickhouse\_data\_disk\_size](#input\_clickhouse\_data\_disk\_size) | Data volume size clickhouse | `number` | `40` | no |
 | <a name="input_clickhouse_db"></a> [clickhouse\_db](#input\_clickhouse\_db) | Db for clickhouse. | `string` | `"clickhouse"` | no |
 | <a name="input_clickhouse_gcs_bucket"></a> [clickhouse\_gcs\_bucket](#input\_clickhouse\_gcs\_bucket) | GCS Bucket for clickhouse backups. | `string` | `"clickhouse-backups-abcguo23"` | no |
 | <a name="input_clickhouse_get_backup_sa_from_secrets_yaml"></a> [clickhouse\_get\_backup\_sa\_from\_secrets\_yaml](#input\_clickhouse\_get\_backup\_sa\_from\_secrets\_yaml) | Flag to toggle getting clickhouse backup SA from secrets.yaml instead of creating new one | `bool` | `false` | no |
 | <a name="input_clickhouse_username"></a> [clickhouse\_username](#input\_clickhouse\_username) | Username for clickhouse. | `string` | `"clickhouse"` | no |
+| <a name="input_cloud_router_bgp"></a> [cloud\_router\_bgp](#input\_cloud\_router\_bgp) | Flag to toggle cloud router bgp | <pre>object(<br>    {<br>      asn = string<br>      # advertise_mode = optional(string, "DEFAULT")<br>      # advertised_groups = optional(list(string))<br>      # advertised_ip_ranges = optional(<br>      #   list(<br>      #     object({<br>      #       range = string<br>      #       description = optional(string)<br>      #     })<br>      #   ),<br>      #   []<br>      # )<br>      keepalive_interval = optional(number)<br>    }<br>  )</pre> | `null` | no |
+| <a name="input_cloud_router_nats"></a> [cloud\_router\_nats](#input\_cloud\_router\_nats) | NATs to deploy on this router. | <pre>list(object({<br>    name                                = string<br>    nat_ip_allocate_option              = optional(string)<br>    source_subnetwork_ip_ranges_to_nat  = optional(string)<br>    nat_ips                             = optional(list(string), [])<br>    min_ports_per_vm                    = optional(number)<br>    max_ports_per_vm                    = optional(number)<br>    udp_idle_timeout_sec                = optional(number)<br>    icmp_idle_timeout_sec               = optional(number)<br>    tcp_established_idle_timeout_sec    = optional(number)<br>    tcp_transitory_idle_timeout_sec     = optional(number)<br>    tcp_time_wait_timeout_sec           = optional(number)<br>    enable_endpoint_independent_mapping = optional(bool)<br>    enable_dynamic_port_allocation      = optional(bool)<br><br>    log_config = optional(object({<br>      enable = optional(bool, true)<br>      filter = optional(string, "ALL")<br>    }), {})<br><br>    subnetworks = optional(list(object({<br>      name                     = string<br>      source_ip_ranges_to_nat  = list(string)<br>      secondary_ip_range_names = optional(list(string))<br>    })), [])<br><br>  }))</pre> | `[]` | no |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | Common tags to apply to any resource | `map(string)` | n/a | yes |
 | <a name="input_create_ssl_cert"></a> [create\_ssl\_cert](#input\_create\_ssl\_cert) | True to create the SSL certificate, false if not | `bool` | `false` | no |
+| <a name="input_custom_node_pools"></a> [custom\_node\_pools](#input\_custom\_node\_pools) | Dynamic extra node pools | <pre>list(object({<br>    name = string<br>    enabled = bool<br>    initial_node_count = number<br>    machine_type = string<br>    disk_size_gb = number<br>    disk_type = string<br>    spot = bool<br>    taints = list(object({<br>      key    = string<br>      value  = string<br>      effect = string<br>    }))<br>    min_node_count  = number<br>    max_node_count  = number<br>    max_surge       = number<br>    max_unavailable = number<br>    labels          = map(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_database_edition"></a> [database\_edition](#input\_database\_edition) | The edition of the database (ENTERPRISE or ENTERPRISE\_PLUS). If null, automatically determined based on version. | `string` | `null` | no |
 | <a name="input_database_name"></a> [database\_name](#input\_database\_name) | The name of the database | `string` | `"datafold"` | no |
 | <a name="input_database_version"></a> [database\_version](#input\_database\_version) | Version of the database | `string` | `"POSTGRES_15"` | no |
 | <a name="input_datafold_intercom_app_id"></a> [datafold\_intercom\_app\_id](#input\_datafold\_intercom\_app\_id) | The app id for the intercom. A value other than "" will enable this feature. Only used if the customer doesn't use slack. | `string` | `""` | no |
 | <a name="input_db_deletion_protection"></a> [db\_deletion\_protection](#input\_db\_deletion\_protection) | A flag that sets delete protection (applied in terraform only, not on the cloud). | `bool` | `true` | no |
-| <a name="input_default_node_disk_size"></a> [default\_node\_disk\_size](#input\_default\_node\_disk\_size) | Disk size for a node | `number` | `40` | no |
+| <a name="input_default_node_disk_size"></a> [default\_node\_disk\_size](#input\_default\_node\_disk\_size) | Root disk size for a cluster node | `number` | `40` | no |
+| <a name="input_deploy_lb"></a> [deploy\_lb](#input\_deploy\_lb) | Allows a deploy with a not-yet-existing load balancer | `bool` | `true` | no |
 | <a name="input_deploy_neg_backend"></a> [deploy\_neg\_backend](#input\_deploy\_neg\_backend) | Set this to true to connect the backend service to the NEG that the GKE cluster will create | `bool` | `true` | no |
 | <a name="input_deploy_vpc_flow_logs"></a> [deploy\_vpc\_flow\_logs](#input\_deploy\_vpc\_flow\_logs) | Flag weither or not to deploy vpc flow logs | `bool` | `false` | no |
 | <a name="input_deployment_name"></a> [deployment\_name](#input\_deployment\_name) | Name of the current deployment. | `string` | n/a | yes |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Provide valid domain name (used to set host in GCP) | `string` | n/a | yes |
+| <a name="input_enable_ch_node_pool"></a> [enable\_ch\_node\_pool](#input\_enable\_ch\_node\_pool) | Whether to enable the ch node pool | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Global environment tag to apply on all datadog logs, metrics, etc. | `string` | n/a | yes |
 | <a name="input_gcs_path"></a> [gcs\_path](#input\_gcs\_path) | Path in the GCS bucket to the backups | `string` | `"backups"` | no |
-| <a name="input_github_endpoint"></a> [github\_endpoint](#input\_github\_endpoint) | URL of Github enpoint to connect to. Useful for GH Enterprise. | `string` | `""` | no |
-| <a name="input_gitlab_endpoint"></a> [gitlab\_endpoint](#input\_gitlab\_endpoint) | URL of Gitlab enpoint to connect to. Useful for GH Enterprise. | `string` | `""` | no |
+| <a name="input_github_endpoint"></a> [github\_endpoint](#input\_github\_endpoint) | URL of Github endpoint to connect to. Useful for Github Enterprise. | `string` | `""` | no |
+| <a name="input_gitlab_endpoint"></a> [gitlab\_endpoint](#input\_gitlab\_endpoint) | URL of Gitlab endpoint to connect to. Useful for GItlab Enterprise. | `string` | `""` | no |
 | <a name="input_host_override"></a> [host\_override](#input\_host\_override) | A valid domain name if they provision their own DNS / routing | `string` | `""` | no |
-| <a name="input_lb_app_rules"></a> [lb\_app\_rules](#input\_lb\_app\_rules) | Extra rules to apply to the application load balancer for additional filtering | <pre>list(object({<br>    action         = string<br>    priority       = number<br>    description    = string<br>    match_type     = string       # can be either "src_ip_ranges" or "expr"<br>    versioned_expr = string       # optional, only used if match_type is "src_ip_ranges"<br>    src_ip_ranges  = list(string) # optional, only used if match_type is "src_ip_ranges"<br>    expr           = string       # optional, only used if match_type is "expr"<br>  }))</pre> | n/a | yes |
+| <a name="input_k8s_authorized_networks"></a> [k8s\_authorized\_networks](#input\_k8s\_authorized\_networks) | Map of CIDR blocks that are able to connect to the K8S control plane | `map(string)` | <pre>{<br>  "0.0.0.0/0": "public"<br>}</pre> | no |
+| <a name="input_k8s_cluster_version"></a> [k8s\_cluster\_version](#input\_k8s\_cluster\_version) | The version of Kubernetes to use for the GKE cluster. The patch/GKE specific version will be found automatically. | `string` | `"1.28.11"` | no |
+| <a name="input_k8s_deletion_protection"></a> [k8s\_deletion\_protection](#input\_k8s\_deletion\_protection) | If deletion protection is enabled (terraform feature) | `bool` | `true` | no |
+| <a name="input_k8s_maintenance_day"></a> [k8s\_maintenance\_day](#input\_k8s\_maintenance\_day) | Day for maintenance window. Valid values are MO,TU,WE,TH,FR,SA,SU | `string` | `"WE"` | no |
+| <a name="input_k8s_maintenance_end"></a> [k8s\_maintenance\_end](#input\_k8s\_maintenance\_end) | The end date and time for the maintenance window. | `string` | `"2036-01-01T12:00:00Z"` | no |
+| <a name="input_k8s_maintenance_start"></a> [k8s\_maintenance\_start](#input\_k8s\_maintenance\_start) | The start date and time for the maintenance window. | `string` | `"2024-01-01T09:00:00Z"` | no |
+| <a name="input_k8s_node_auto_upgrade"></a> [k8s\_node\_auto\_upgrade](#input\_k8s\_node\_auto\_upgrade) | Whether to enable auto-upgrade for the GKE cluster nodes | `bool` | `true` | no |
+| <a name="input_k8s_node_version"></a> [k8s\_node\_version](#input\_k8s\_node\_version) | The version of the nodes | `string` | `"1.28.11"` | no |
+| <a name="input_lb_app_rules"></a> [lb\_app\_rules](#input\_lb\_app\_rules) | Extra rules to apply to the application load balancer for additional filtering | <pre>list(object({<br>    action         = string<br>    priority       = number<br>    description    = string<br>    match_type     = string       # can be either "src_ip_ranges" or "expr"<br>    versioned_expr = string       # optional, only used if match_type is "src_ip_ranges"<br>    src_ip_ranges  = list(string) # optional, only used if match_type is "src_ip_ranges"<br>    expr           = string       # optional, only used if match_type is "expr"<br>  }))</pre> | `[]` | no |
 | <a name="input_lb_layer_7_ddos_defence"></a> [lb\_layer\_7\_ddos\_defence](#input\_lb\_layer\_7\_ddos\_defence) | Flag to toggle layer 7 ddos defence | `bool` | `false` | no |
 | <a name="input_legacy_naming"></a> [legacy\_naming](#input\_legacy\_naming) | Flag to toggle legacy behavior - like naming of resources | `bool` | `true` | no |
+| <a name="input_machine_type"></a> [machine\_type](#input\_machine\_type) | The machine type for the GKE cluster nodes | `string` | `"e2-highmem-8"` | no |
+| <a name="input_max_node_count"></a> [max\_node\_count](#input\_max\_node\_count) | The maximum number of nodes in the cluster | `number` | `6` | no |
 | <a name="input_mig_disk_type"></a> [mig\_disk\_type](#input\_mig\_disk\_type) | https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance_template#disk_type | `string` | `"pd-balanced"` | no |
 | <a name="input_postgres_allocated_storage"></a> [postgres\_allocated\_storage](#input\_postgres\_allocated\_storage) | The amount of allocated storage for the postgres database | `number` | `20` | no |
 | <a name="input_postgres_instance"></a> [postgres\_instance](#input\_postgres\_instance) | GCP instance type for PostgreSQL database.<br>Available instance groups: .<br>Available instance classes: . | `string` | `"db-custom-2-7680"` | no |
@@ -228,7 +245,7 @@ Now all containers should be up and running.
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The project to deploy to, if not set the default provider project is used. | `string` | n/a | yes |
 | <a name="input_provider_azs"></a> [provider\_azs](#input\_provider\_azs) | Provider AZs list, if empty we get AZs dynamically | `list(string)` | n/a | yes |
 | <a name="input_provider_region"></a> [provider\_region](#input\_provider\_region) | Region for deployment in GCP | `string` | n/a | yes |
-| <a name="input_redis_data_size"></a> [redis\_data\_size](#input\_redis\_data\_size) | Redis volume size | `number` | `10` | no |
+| <a name="input_redis_data_size"></a> [redis\_data\_size](#input\_redis\_data\_size) | Redis volume size | `number` | `50` | no |
 | <a name="input_remote_storage"></a> [remote\_storage](#input\_remote\_storage) | Type of remote storage for clickhouse backups. | `string` | `"gcs"` | no |
 | <a name="input_restricted_roles"></a> [restricted\_roles](#input\_restricted\_roles) | Flag to stop certain IAM related resources from being updated/changed | `bool` | `false` | no |
 | <a name="input_restricted_viewer_role"></a> [restricted\_viewer\_role](#input\_restricted\_viewer\_role) | Flag to stop certain IAM related resources from being updated/changed | `bool` | `false` | no |
@@ -272,8 +289,9 @@ Now all containers should be up and running.
 | <a name="output_redis_data_size"></a> [redis\_data\_size](#output\_redis\_data\_size) | The size in GB of the redis data volume |
 | <a name="output_redis_data_volume_id"></a> [redis\_data\_volume\_id](#output\_redis\_data\_volume\_id) | The volume ID of the Redis PD data volume |
 | <a name="output_redis_password"></a> [redis\_password](#output\_redis\_password) | The Redis password |
-| <a name="output_vpc_cidr"></a> [vpc\_cidr](#output\_vpc\_cidr) | The CIDR range of the VPC |
+| <a name="output_vpc_cidr"></a> [vpc\_cidr](#output\_vpc\_cidr) | The VPC CIDR range |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | The ID of the Google VPC the cluster runs in. |
+| <a name="output_vpc_selflink"></a> [vpc\_selflink](#output\_vpc\_selflink) | The ID of the Google VPC the cluster runs in. |
 | <a name="output_vpc_subnetwork"></a> [vpc\_subnetwork](#output\_vpc\_subnetwork) | The subnet in which the cluster is created |
 
 <!-- END_TF_DOCS -->
