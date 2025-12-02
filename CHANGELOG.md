@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.6.2](https://github.com/datafold/terraform-google-datafold/compare/v1.6.1...v1.6.2) (2025-12-02)
+
+
+### Bug Fixes
+
+* Consistency in SA names ([d8ca5a3](https://github.com/datafold/terraform-google-datafold/commit/d8ca5a348e31dc5638e8ae4dac72889e20bedb04))
+
 ### [1.6.1](https://github.com/datafold/terraform-google-datafold/compare/v1.6.0...v1.6.1) (2025-10-10)
 
 
