@@ -15,7 +15,7 @@ resource "google_storage_bucket" "clickhouse_backup" {
 
   lifecycle_rule {
     condition {
-      age = 14
+      age = var.backup_lifecycle_expiration_days
     }
     action {
       type = "Delete"

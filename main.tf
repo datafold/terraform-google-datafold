@@ -27,6 +27,7 @@ module "clickhouse_backup" {
   project_id                                 = var.project_id
   clickhouse_get_backup_sa_from_secrets_yaml = var.clickhouse_get_backup_sa_from_secrets_yaml
   legacy_naming                              = var.legacy_naming
+  backup_lifecycle_expiration_days           = var.backup_lifecycle_expiration_days
 }
 
 module "networking" {
