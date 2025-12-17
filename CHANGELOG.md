@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.6.3](https://github.com/datafold/terraform-google-datafold/compare/v1.6.2...v1.6.3) (2025-12-17)
+
+
+### Bug Fixes
+
+* Update clickhouse backup retention ([531834b](https://github.com/datafold/terraform-google-datafold/commit/531834b84e010cba06df0f2ab47acdebcd705fe6))
+
 ### [1.6.2](https://github.com/datafold/terraform-google-datafold/compare/v1.6.1...v1.6.2) (2025-12-02)
 
 
