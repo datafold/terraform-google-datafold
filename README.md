@@ -195,6 +195,7 @@ Now all containers should be up and running.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_add_onprem_support_group"></a> [add\_onprem\_support\_group](#input\_add\_onprem\_support\_group) | Flag to add onprem support group for datafold-onprem-support@datafold.com | `bool` | `true` | no |
+| <a name="input_backup_lifecycle_expiration_days"></a> [backup\_lifecycle\_expiration\_days](#input\_backup\_lifecycle\_expiration\_days) | Number of days after which clickhouse backup objects will expire and be deleted. | `number` | `6` | no |
 | <a name="input_ch_machine_type"></a> [ch\_machine\_type](#input\_ch\_machine\_type) | The machine type for the ch GKE cluster nodes | `string` | `"n2-standard-8"` | no |
 | <a name="input_clickhouse_backup_sa_key"></a> [clickhouse\_backup\_sa\_key](#input\_clickhouse\_backup\_sa\_key) | SA key from secrets | `string` | `""` | no |
 | <a name="input_clickhouse_data_disk_size"></a> [clickhouse\_data\_disk\_size](#input\_clickhouse\_data\_disk\_size) | Data volume size clickhouse | `number` | `40` | no |

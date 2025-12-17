@@ -40,3 +40,9 @@ variable "legacy_naming" {
   default     = true
   description = "Flag to toggle legacy behavior - like naming of resources"
 }
+
+variable "backup_lifecycle_expiration_days" {
+  type        = number
+  default     = 6
+  description = "Number of days after which clickhouse backup objects will expire and be deleted."
+}
