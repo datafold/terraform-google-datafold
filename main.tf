@@ -17,6 +17,18 @@ module "project_factory_project_services" {
   ]
 }
 
+module "temporal_backup" {
+  count  = var.deploy_temporal ? 1 : 0
+  source = "./modules/temporal_backup"
+
+  provider_region                  = var.provider_region
+  deployment_name                  = var.deployment_name
+  project_id                       = var.project_id
+  temporal_gcs_bucket              = var.temporal_gcs_bucket
+  backup_lifecycle_expiration_days = var.temporal_backup_lifecycle_expiration_days
+  temporal_postgres_namespace      = var.temporal_postgres_namespace
+}
+
 module "clickhouse_backup" {
   source = "./modules/clickhouse_backup"
 

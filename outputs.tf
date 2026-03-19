@@ -113,6 +113,16 @@ output "vpc_subnetwork" {
   description = "The subnet in which the cluster is created"
 }
 
+output "temporal_gcs_bucket" {
+  value       = try(one(module.temporal_backup[*].temporal_gcs_bucket), "not active")
+  description = "Name of the GCS bucket for the Temporal PostgreSQL backups"
+}
+
+output "temporal_backup_sa" {
+  value       = try(one(module.temporal_backup[*].temporal_backup_sa), "not active")
+  description = "Email of the GCP service account for the Temporal postgres-pod (annotate the K8s SA with this for Workload Identity)"
+}
+
 output "cloud_provider" {
   value       = "gcp"
   description = "The cloud provider creating all the resources"
