@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.6.4](https://github.com/datafold/terraform-google-datafold/compare/v1.6.3...v1.6.4) (2026-03-19)
+
+
+### Bug Fixes
+
+* Add temporal backup + role ([b4cd77c](https://github.com/datafold/terraform-google-datafold/commit/b4cd77c2dbd6df8f56bd6b917e63f3b5f2d734cd))
+
 ### [1.6.3](https://github.com/datafold/terraform-google-datafold/compare/v1.6.2...v1.6.3) (2025-12-17)
 
 
