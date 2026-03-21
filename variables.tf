@@ -357,7 +357,7 @@ variable "postgres_ro_username" {
 
 variable "database_version" {
   type        = string
-  default     = "POSTGRES_15"
+  default     = "POSTGRES_17"
   description = "Version of the database"
 }
 
@@ -548,7 +548,7 @@ variable "k8s_authorized_networks" {
 
 variable "k8s_cluster_version" {
   type        = string
-  default     = "1.28.11"
+  default     = "1.35"
   description = "The version of Kubernetes to use for the GKE cluster. The patch/GKE specific version will be found automatically."
 }
 
