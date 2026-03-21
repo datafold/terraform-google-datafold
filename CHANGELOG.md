@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.6.6](https://github.com/datafold/terraform-google-datafold/compare/v1.6.5...v1.6.6) (2026-03-21)
+
+
+### Bug Fixes
+
+* Set regular stream version ([5b2e77f](https://github.com/datafold/terraform-google-datafold/commit/5b2e77f42ba5dbac6c8dd1865b38e956dc5f022c))
+
 ### [1.6.5](https://github.com/datafold/terraform-google-datafold/compare/v1.6.4...v1.6.5) (2026-03-21)
 
 
