@@ -548,7 +548,7 @@ variable "k8s_authorized_networks" {
 
 variable "k8s_cluster_version" {
   type        = string
-  default     = "1.35"
+  default     = "1.33"
   description = "The version of Kubernetes to use for the GKE cluster. The patch/GKE specific version will be found automatically."
 }
 
