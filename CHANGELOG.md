@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.6.7](https://github.com/datafold/terraform-google-datafold/compare/v1.6.6...v1.6.7) (2026-04-20)
+
+
+### Bug Fixes
+
+* Add new parameter for disk type ([5d7a006](https://github.com/datafold/terraform-google-datafold/commit/5d7a00637aab09feca5b9fdc00a4ada450180e56))
+
 ### [1.6.6](https://github.com/datafold/terraform-google-datafold/compare/v1.6.5...v1.6.6) (2026-03-21)
 
 
