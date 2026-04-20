@@ -492,6 +492,12 @@ variable "default_node_disk_size" {
   description = "Root disk size for a cluster node"
 }
 
+variable "default_node_disk_type" {
+  type        = string
+  default     = "pd-standard"
+  description = "The disk type for the GKE cluster nodes"
+}
+
 variable "vpc_master_cidr_block" {
   type        = string
   default     = "192.168.0.0/28"
