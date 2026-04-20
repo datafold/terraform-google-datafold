@@ -101,6 +101,7 @@ module "gke" {
   subnetwork              = local.vpc_subnetwork
   azs                     = local.azs
   disk_size_gb            = var.default_node_disk_size
+  disk_type               = var.default_node_disk_type
   vpc_master_cidr_block   = var.vpc_master_cidr_block
   machine_type            = var.machine_type
   enable_ch_node_pool     = var.enable_ch_node_pool
