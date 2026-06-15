@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+## [1.7.0](https://github.com/datafold/terraform-google-datafold/compare/v1.6.7...v1.7.0) (2026-06-15)
+
+
+### Features
+
+* Generate and wire status check token ([ad6809d](https://github.com/datafold/terraform-google-datafold/commit/ad6809dfc571162780857bfa65f20e808eb4f6a8))
+
 ### [1.6.7](https://github.com/datafold/terraform-google-datafold/compare/v1.6.6...v1.6.7) (2026-04-20)
 
 
