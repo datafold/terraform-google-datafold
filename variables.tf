@@ -604,3 +604,9 @@ variable "max_node_count" {
   default     = 6
   description = "The maximum number of nodes in the cluster"
 }
+
+variable "status_check_token" {
+  type        = string
+  default     = ""
+  description = "Token used by the server's /livez and /readyz probes to validate status-check requests. Leave empty to auto-generate a random token."
+}

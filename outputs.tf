@@ -93,6 +93,11 @@ output "redis_password" {
   description = "The Redis password"
 }
 
+output "status_check_token" {
+  value       = coalesce(var.status_check_token, resource.random_password.status_check_token.result)
+  description = "Token used by the server's /livez and /readyz probes; the var override if set, otherwise the generated token"
+}
+
 output "vpc_id" {
   value       = local.vpc_id
   description = "The ID of the Google VPC the cluster runs in."

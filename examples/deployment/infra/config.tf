@@ -31,6 +31,7 @@ output "infra_config" {
       redis_data_size                = module.gcp.redis_data_size,
       redis_data_volume_id           = module.gcp.redis_data_volume_id,
       server_name                    = module.gcp.domain_name,
+      status_check_token             = module.gcp.status_check_token,
       vpc_cidr                       = module.gcp.vpc_cidr,
 
       # service accounts vars
