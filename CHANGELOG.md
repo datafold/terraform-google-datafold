@@ -2,6 +2,13 @@
 
 See this file for notable changes between versions.
 
+### [1.7.1](https://github.com/datafold/terraform-google-datafold/compare/v1.7.0...v1.7.1) (2026-06-17)
+
+
+### Bug Fixes
+
+* Activate PITR for enterprise plus ([21e6a9e](https://github.com/datafold/terraform-google-datafold/commit/21e6a9ed1cf4c9de090d32e71b59dbf9c87365f6))
+
 ## [1.7.0](https://github.com/datafold/terraform-google-datafold/compare/v1.6.7...v1.7.0) (2026-06-15)
 
 
