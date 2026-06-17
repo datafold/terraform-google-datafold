@@ -372,6 +372,27 @@ variable "database_edition" {
   }
 }
 
+variable "point_in_time_recovery_enabled" {
+  type        = bool
+  default     = null
+  description = <<-EOT
+    Enable point-in-time recovery (continuous WAL archiving) for the PostgreSQL
+    instance. When null, defaults to true for ENTERPRISE_PLUS edition and false
+    otherwise. Note: changing this triggers an instance restart, and on
+    ENTERPRISE edition transaction logs consume the data disk.
+EOT
+}
+
+variable "transaction_log_retention_days" {
+  type        = number
+  default     = null
+  description = <<-EOT
+    Number of days to retain transaction logs for point-in-time recovery.
+    Null uses the provider/edition default (1-7 days for ENTERPRISE, up to 35
+    for ENTERPRISE_PLUS).
+EOT
+}
+
 #  ┏━╸╻  ╻┏━╸╻┏ ╻ ╻┏━┓╻ ╻┏━┓┏━╸
 #  ┃  ┃  ┃┃  ┣┻┓┣━┫┃ ┃┃ ┃┗━┓┣╸
 #  ┗━╸┗━╸╹┗━╸╹ ╹╹ ╹┗━┛┗━┛┗━┛┗━╸

@@ -1,3 +1,14 @@
+locals {
+  # PITR (continuous WAL archiving) defaults to on for ENTERPRISE_PLUS and off
+  # otherwise (including when the edition is null/auto-determined). An explicit
+  # value for point_in_time_recovery_enabled always wins.
+  point_in_time_recovery_enabled = (
+    var.point_in_time_recovery_enabled != null
+    ? var.point_in_time_recovery_enabled
+    : coalesce(var.database_edition, "") == "ENTERPRISE_PLUS"
+  )
+}
+
 # https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/latest/submodules/private_service_access
 module "db_private_service_access" {
   source      = "GoogleCloudPlatform/sql-db/google//modules/private_service_access"
@@ -49,8 +60,8 @@ module "db" {
     enabled                        = true
     start_time                     = "20:00"
     location                       = null
-    point_in_time_recovery_enabled = false
-    transaction_log_retention_days = null
+    point_in_time_recovery_enabled = local.point_in_time_recovery_enabled
+    transaction_log_retention_days = var.transaction_log_retention_days
     retained_backups               = 7
     retention_unit                 = "COUNT"
   }
