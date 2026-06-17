@@ -87,7 +87,11 @@ module "database" {
   postgres_ro_username       = var.postgres_ro_username
   database_version           = var.database_version
   database_edition           = var.database_edition
-  common_tags                = var.common_tags
+
+  point_in_time_recovery_enabled = var.point_in_time_recovery_enabled
+  transaction_log_retention_days = var.transaction_log_retention_days
+
+  common_tags = var.common_tags
 
   depends_on = [module.project_factory_project_services]
 }
